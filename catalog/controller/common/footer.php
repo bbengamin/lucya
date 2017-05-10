@@ -44,6 +44,10 @@ class ControllerCommonFooter extends Controller {
 		$data['order'] = $this->url->link('account/order', '', 'SSL');
 		$data['wishlist'] = $this->url->link('account/wishlist', '', 'SSL');
 		$data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
+		
+		$data['vk'] = $this->config->get('config_vk');
+		$data['facebook'] = $this->config->get('config_facebook');
+		$data['instagram'] = $this->config->get('config_instagram');
 
 		$data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
 
@@ -72,10 +76,34 @@ class ControllerCommonFooter extends Controller {
 			$this->model_tool_online->addOnline($ip, $this->customer->getId(), $url, $referer);
 		}
 
+		$this->load->model('account/download');
+		
+		$results = $this->model_account_download->getFiles();
+	
+		foreach ($results as $result) {
+			$data['files'][] = array(
+				'link' => $this->url->link('account/download/download', 'download_id=' . $result['download_id'], 'SSL'),
+				'name' => $result['name']
+			);
+		}
+		
+		//var_dump($data['files']);
+		
+		/*foreach ($files as $file) {
+			$data['filename'] = $file['filename'];
+			$data['name'] = $file['name'];
+		}*/
+		//var_dump($files);
+		//die();
+		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/footer.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/common/footer.tpl', $data);
 		} else {
 			return $this->load->view('default/template/common/footer.tpl', $data);
 		}
+		
+		
+		
+	
 	}
 }

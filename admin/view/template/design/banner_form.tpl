@@ -52,7 +52,7 @@
             <thead>
               <tr>
                 <td class="text-left"><?php echo $entry_title; ?></td>
-                <td class="text-left"><?php echo $entry_link; ?></td>
+                <td class="text-left">Ссылка на видео</td>
                 <td class="text-left"><?php echo $entry_image; ?></td>
                 <td class="text-right"><?php echo $entry_sort_order; ?></td>
                 <td></td>
@@ -64,7 +64,8 @@
               <tr id="image-row<?php echo $image_row; ?>">
                 <td class="text-left"><?php foreach ($languages as $language) { ?>
                   <div class="input-group pull-left"><span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /> </span>
-                    <input type="text" name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][title]" value="<?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['title'] : ''; ?>" placeholder="<?php echo $entry_title; ?>" class="form-control" />
+                    <textarea id="text-descript<?php echo $image_row; ?>" name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][title]" class="form-control summernote-textarea" ><?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['title'] : ''; ?></textarea>
+                    <!-- <input type="text" name="banner_image[<?php echo $image_row; ?>][banner_image_description][<?php echo $language['language_id']; ?>][title]" value="<?php echo isset($banner_image['banner_image_description'][$language['language_id']]) ? $banner_image['banner_image_description'][$language['language_id']]['title'] : ''; ?>" placeholder="<?php echo $entry_title; ?>" class="form-control" /> -->
                   </div>
                   <?php if (isset($error_banner_image[$image_row][$language['language_id']])) { ?>
                   <div class="text-danger"><?php echo $error_banner_image[$image_row][$language['language_id']]; ?></div>
@@ -98,19 +99,26 @@ function addImage() {
     html += '  <td class="text-left">';
 	<?php foreach ($languages as $language) { ?>
 	html += '    <div class="input-group">';
-	html += '      <span class="input-group-addon"><img src="view/image/flags/<?php echo $language['image']; ?>" title="<?php echo $language['name']; ?>" /></span><input type="text" name="banner_image[' + image_row + '][banner_image_description][<?php echo $language['language_id']; ?>][title]" value="" placeholder="<?php echo $entry_title; ?>" class="form-control" />';
+	html += '      <span class="input-group-addon"></span><textarea id="text-descript' + image_row + '" name="banner_image[' + image_row + '][banner_image_description][<?php echo $language['language_id']; ?>][title]" class="form-control summernote-textarea"></textarea>';
     html += '    </div>';
 	<?php } ?>
 	html += '  </td>';	
 	html += '  <td class="text-left" style="width: 30%;"><input type="text" name="banner_image[' + image_row + '][link]" value="" placeholder="<?php echo $entry_link; ?>" class="form-control" /></td>';	
 	html += '  <td class="text-left"><a href="" id="thumb-image' + image_row + '" data-toggle="image" class="img-thumbnail"><img src="<?php echo $placeholder; ?>" alt="" title="" data-placeholder="<?php echo $placeholder; ?>" /></a><input type="hidden" name="banner_image[' + image_row + '][image]" value="" id="input-image' + image_row + '" /></td>';
-	html += '  <td class="text-right" style="width: 10%;><input type="text" name="banner_image[' + image_row + '][sort_order]" value="" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>';
+	html += '  <td class="text-right" style="width: 10%;"><input type="text" name="banner_image[' + image_row + '][sort_order]" value="" placeholder="<?php echo $entry_sort_order; ?>" class="form-control" /></td>';
 	html += '  <td class="text-left"><button type="button" onclick="$(\'#image-row' + image_row  + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
 	
 	$('#images tbody').append(html);
-	
+	/*$('.summernote-textarea').summernote({height: 300});*/
 	image_row++;
 }
 //--></script></div>
+
+<script type="text/javascript"><!--
+
+/*$('.summernote-textarea').summernote({height: 300});*/
+//--></script>
+
+
 <?php echo $footer; ?>

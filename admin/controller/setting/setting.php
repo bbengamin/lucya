@@ -8,6 +8,7 @@ class ControllerSettingSetting extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('setting/setting');
+		$this->load->model('design/banner');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('config', $this->request->post);
@@ -507,6 +508,30 @@ class ControllerSettingSetting extends Controller {
 		} else {
 			$data['config_telephone'] = $this->config->get('config_telephone');
 		}
+		
+		if (isset($this->request->post['config_telephone2'])) {
+			$data['config_telephone2'] = $this->request->post['config_telephone2'];
+		} else {
+			$data['config_telephone2'] = $this->config->get('config_telephone2');
+		}
+		
+		if (isset($this->request->post['config_vk'])) {
+			$data['config_vk'] = $this->request->post['config_vk'];
+		} else {
+			$data['config_vk'] = $this->config->get('config_vk');
+		}
+		
+		if (isset($this->request->post['config_facebook'])) {
+			$data['config_facebook'] = $this->request->post['config_facebook'];
+		} else {
+			$data['config_facebook'] = $this->config->get('config_facebook');
+		}
+		
+		if (isset($this->request->post['config_instagram'])) {
+			$data['config_instagram'] = $this->request->post['config_instagram'];
+		} else {
+			$data['config_instagram'] = $this->config->get('config_instagram');
+		}
 
 		if (isset($this->request->post['config_fax'])) {
 			$data['config_fax'] = $this->request->post['config_fax'];
@@ -538,12 +563,42 @@ class ControllerSettingSetting extends Controller {
 			$data['config_open'] = $this->config->get('config_open');
 		}
 
+		$results = $this->model_design_banner->getBanners(array());
+		foreach ($results as $result) {
+			$data['banners'][$result['banner_id']] = array(
+				'banner_id' => $result['banner_id'],
+				'name'      => $result['name']
+			);
+		}
+		
+		if (isset($this->request->post['config_gallery'])) {
+			$config_gallery = $this->request->post['config_gallery'];
+		} else {
+			$config_gallery = $this->config->get('config_gallery');
+		}
+		$data['config_gallery'] = array();
+		if($config_gallery){
+			foreach($config_gallery as $gall){
+				$data['config_gallery'][] = array(
+					'banner_id' => $data['banners'][$gall]['banner_id'],
+					'name'      => $data['banners'][$gall]['name']
+				);
+			}
+		}
+		
+
 		if (isset($this->request->post['config_comment'])) {
 			$data['config_comment'] = $this->request->post['config_comment'];
 		} else {
 			$data['config_comment'] = $this->config->get('config_comment');
 		}
-
+		
+		/*if (isset($this->request->post['config_banner_id'])) {
+			$data['config_banner_id'] = $this->request->post['config_banner_id'];
+		} else {
+			$data['config_banner_id'] = $this->config->get('config_banner_id');
+		}
+*/
 		$this->load->model('localisation/location');
 
 		$data['locations'] = $this->model_localisation_location->getLocations();
@@ -1347,6 +1402,10 @@ class ControllerSettingSetting extends Controller {
 		}
 
 		if ((utf8_strlen($this->request->post['config_telephone']) < 3) || (utf8_strlen($this->request->post['config_telephone']) > 32)) {
+			$this->error['telephone'] = $this->language->get('error_telephone');
+		}
+		
+		if ((utf8_strlen($this->request->post['config_telephone2']) < 3) || (utf8_strlen($this->request->post['config_telephone2']) > 32)) {
 			$this->error['telephone'] = $this->language->get('error_telephone');
 		}
 

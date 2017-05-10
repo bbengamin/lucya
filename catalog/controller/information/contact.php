@@ -7,7 +7,13 @@ class ControllerInformationContact extends Controller {
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+			$text = "Отправленно с формы - 'Контакты' \n\n";
+			$text .= "Имя:" . $this->request->post['name'] . "\n";
+			$text .= "Телефон:" . $this->request->post['phone'] . "\n";
+			$text .= "Email:" .  $this->request->post['email'] . "\n";
+			$text .= "Текст сообщеия:" .  $this->request->post['text'] . "\n";
+			
 			$mail = new Mail();
 			$mail->protocol = $this->config->get('config_mail_protocol');
 			$mail->parameter = $this->config->get('config_mail_parameter');
@@ -18,10 +24,10 @@ class ControllerInformationContact extends Controller {
 			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 			$mail->setTo($this->config->get('config_email'));
-			$mail->setFrom($this->request->post['email']);
-			$mail->setSender(html_entity_decode($this->request->post['name'], ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode(sprintf($this->language->get('email_subject'), $this->request->post['name']), ENT_QUOTES, 'UTF-8'));
-			$mail->setText($this->request->post['enquiry']);
+			$mail->setFrom($this->config->get('config_email'));
+			$mail->setSender(html_entity_decode($this->config->get('config_email'), ENT_QUOTES, 'UTF-8'));
+			$mail->setSubject(html_entity_decode("Контакты", ENT_QUOTES, 'UTF-8'));
+			$mail->setText($text);
 			$mail->send();
 
 			$this->response->redirect($this->url->link('information/contact/success'));
@@ -90,7 +96,9 @@ class ControllerInformationContact extends Controller {
 		$data['address'] = nl2br($this->config->get('config_address'));
 		$data['geocode'] = $this->config->get('config_geocode');
 		$data['geocode_hl'] = $this->config->get('config_language');
+		$data['config_email'] = $this->config->get('config_email');
 		$data['telephone'] = $this->config->get('config_telephone');
+		$data['telephone2'] = $this->config->get('config_telephone2');
 		$data['fax'] = $this->config->get('config_fax');
 		$data['open'] = nl2br($this->config->get('config_open'));
 		$data['comment'] = $this->config->get('config_comment');
@@ -160,31 +168,6 @@ class ControllerInformationContact extends Controller {
 		} else {
 			$this->response->setOutput($this->load->view('default/template/information/contact.tpl', $data));
 		}
-	}
-
-	protected function validate() {
-		if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 32)) {
-			$this->error['name'] = $this->language->get('error_name');
-		}
-
-		if (!preg_match('/^[^\@]+@.*.[a-z]{2,15}$/i', $this->request->post['email'])) {
-			$this->error['email'] = $this->language->get('error_email');
-		}
-
-		if ((utf8_strlen($this->request->post['enquiry']) < 10) || (utf8_strlen($this->request->post['enquiry']) > 3000)) {
-			$this->error['enquiry'] = $this->language->get('error_enquiry');
-		}
-
-		// Captcha
-		if ($this->config->get($this->config->get('config_captcha') . '_status') && in_array('contact', (array)$this->config->get('config_captcha_page'))) {
-			$captcha = $this->load->controller('captcha/' . $this->config->get('config_captcha') . '/validate');
-
-			if ($captcha) {
-				$this->error['captcha'] = $captcha;
-			}
-		}
-
-		return !$this->error;
 	}
 
 	public function success() {

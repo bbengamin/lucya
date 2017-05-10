@@ -41,7 +41,7 @@
                 <?php foreach ($languages as $language) { ?>
                 <div class="tab-pane" id="language<?php echo $language['language_id']; ?>">
                   <div class="form-group required">
-                    <label class="col-sm-2 control-label" for="input-title<?php echo $language['language_id']; ?>"><?php echo $entry_title; ?></label>
+                    <label class="col-sm-2 control-label" for="input-title<?php echo $language['language_id']; ?>"><?php echo $entry_title;?></label>
                     <div class="col-sm-10">
                       <input type="text" name="information_description[<?php echo $language['language_id']; ?>][title]" value="<?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['title'] : ''; ?>" placeholder="<?php echo $entry_title; ?>" id="input-title<?php echo $language['language_id']; ?>" class="form-control" />
                       <?php if (isset($error_title[$language['language_id']])) { ?>
@@ -77,6 +77,18 @@
                     <label class="col-sm-2 control-label" for="input-meta-keyword<?php echo $language['language_id']; ?>"><?php echo $entry_meta_keyword; ?></label>
                     <div class="col-sm-10">
                       <textarea name="information_description[<?php echo $language['language_id']; ?>][meta_keyword]" rows="5" placeholder="<?php echo $entry_meta_keyword; ?>" id="input-meta-keyword<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['meta_keyword'] : ''; ?></textarea>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-video<?php echo $language['language_id']; ?>"><?php echo $entry_video; ?></label>
+                    <div class="col-sm-10">
+                      <input type="text" name="information_description[<?php echo $language['language_id']; ?>][video]" value="<?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['video'] : ''; ?>" placeholder="Видео" id="input-video<?php echo $language['language_id']; ?>" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-description2<?php echo $language['language_id']; ?>"><?php echo $entry_description2; ?></label>
+                    <div class="col-sm-10">
+                      <textarea name="information_description[<?php echo $language['language_id']; ?>][description2]" placeholder="Дополнительное описание" id="input-description2<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($information_description[$language['language_id']]) ? $information_description[$language['language_id']]['description2'] : ''; ?></textarea>
                     </div>
                   </div>
                 </div>
@@ -209,6 +221,10 @@
   <script type="text/javascript"><!--
 <?php foreach ($languages as $language) { ?>
 $('#input-description<?php echo $language['language_id']; ?>').summernote({
+	height: 300
+});
+
+$('#input-description2<?php echo $language['language_id']; ?>').summernote({
 	height: 300
 });
 <?php } ?>

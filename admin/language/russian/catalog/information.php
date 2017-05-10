@@ -22,10 +22,12 @@ $_['entry_meta_title'] 	     = 'Мета-тег Title';
 $_['entry_meta_keyword'] 	 = 'Мета-тег Keywords';
 $_['entry_meta_description'] = 'Мета-тег Description';
 $_['entry_keyword']          = 'SEO URL';
-$_['entry_bottom']           = 'Отображить снизу';
+$_['entry_bottom']           = 'Отобразить снизу';
 $_['entry_status']           = 'Статус';
 $_['entry_sort_order']       = 'Порядок сортировки';
 $_['entry_layout']           = 'Выберите схему';
+$_['entry_video']               = 'Видео';
+$_['entry_description2']        = 'Дополнительное описание';
 
 // Help
 $_['help_keyword']           = 'Должно быть уникальным на всю систему и без пробелов';

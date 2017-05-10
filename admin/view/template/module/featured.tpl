@@ -47,6 +47,14 @@
               </div>
             </div>
           </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-description">Описание</label>
+            <div class="col-sm-10">
+              <textarea name="description" placeholder="Описание" id="input-description"><?php echo isset($description) ? $description : ''; ?></textarea>
+            </div>
+          </div>
+          
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-limit"><?php echo $entry_limit; ?></label>
             <div class="col-sm-10">
@@ -90,6 +98,7 @@
     </div>
   </div>
   <script type="text/javascript"><!--
+$('#input-description').summernote({height: 300});
 $('input[name=\'product\']').autocomplete({
 	source: function(request, response) {
 		$.ajax({

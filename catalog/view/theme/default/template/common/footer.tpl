@@ -1,53 +1,114 @@
 <footer>
   <div class="container">
-    <div class="row">
-      <?php if ($informations) { ?>
-      <div class="col-sm-3">
-        <h5><?php echo $text_information; ?></h5>
-        <ul class="list-unstyled">
-          <?php foreach ($informations as $information) { ?>
-          <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-          <?php } ?>
-        </ul>
-      </div>
-      <?php } ?>
-      <div class="col-sm-3">
-        <h5><?php echo $text_service; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-          <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
-          <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <h5><?php echo $text_extra; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
-          <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li>
-          <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
-          <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <h5><?php echo $text_account; ?></h5>
-        <ul class="list-unstyled">
-          <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
-          <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-          <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-          <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
-        </ul>
-      </div>
-    </div>
-    <hr>
-    <p><?php echo $powered; ?></p>
+   <div class="social-footer-list-box">
+     <ul class="list-unstyled social-footer-box">
+       <li><a href='<?php echo $vk; ?>' target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a></li>
+       <li><a href='<?php echo $facebook; ?>' target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+       <li><a href='<?php echo $instagram; ?>' target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+     </ul>
+   </div>
+   
+
+   
+   
+   <div class="copy-right-text-box">
+      <p>Ресторан “Люся, не ори” © 2017</p>
+   </div>
   </div>
 </footer>
 
-<!--
-OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
-Please donate via PayPal to donate@opencart.com
-//-->
+<!-- Modal-reservation -->
+<div id="modal-reservation" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal"><i class="material-icons">close</i></button>
+        <h4 class="modal-title">Резервация столика</h4>
+       
+        <form id="reservation-form" class="modal-form">
+             <p>Пожалуйста, введите Ваши данные</p>
+            <div class="input-field">
+                <input type='text' name='name' placeholder='Ваше имя'>
+            </div>
+            <div class="input-field">
+                <input type='tel' name='phone' placeholder='Ваш телефон'>
+            </div>
+            <p>Желаемая дата посещения:</p>
+            <div class="input-field">
+                <input type='text' name='date' class='date-pick-item' placeholder='Нажмите для выбора'>
+            </div>
+             <div class="input-field">
+                <button type='submit' id='reservation-form-submit' class='modal-buttons'>Зарезервировать</button>
+            </div>
+        </form>
+        <h4 class="thanks-text">
+            Спасибо, мы перезвоним Вам в течение нескольких минут, для уточнения деталей.
+        </h4>
+      </div>
+    </div>
 
-<!-- Theme created by Welford Media for OpenCart 2.0 www.welfordmedia.co.uk -->
+  </div>
+</div>
+
+<!-- Modal-reservation -->
+<div id="modal-banket" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal"><i class="material-icons">close</i></button>
+        <h4 class="modal-title">Резервация столика</h4>
+        
+        <form id="banket-form" class="modal-form">
+            <p>Пожалуйста, введите Ваши данные</p>
+            <div class="input-field">
+                <input type='text' name='name' placeholder='Ваше имя'>
+            </div>
+            <div class="input-field">
+                <input type='tel' name='phone' placeholder='Ваш телефон'>
+            </div>
+            <p>Желаемая дата банкета:</p>
+            <div class="input-field">
+                <input type='text' name='date' class='date-pick-item' placeholder='Нажмите для выбора'>
+            </div>
+             <div class="input-field">
+                <button type='submit' id='banket-form-submit' class='modal-buttons'>Заказать банкет</button>
+            </div>
+        </form>
+        <h4 class="thanks-text">
+            Спасибо, мы перезвоним Вам в течение нескольких минут, для уточнения деталей.
+        </h4>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal-reservation -->
+<div id="modal-menu" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal"><i class="material-icons">close</i></button>
+        <h4 class="modal-title">Выберите меню</h4>
+        
+        <div class="menu-selection-box">
+            <?php if($files) { ?>
+            <ul class="list-unstyled">
+                <?php foreach ($files as $file) { ?>
+                <li><a href="<?php echo $file['link'] ?>" class="menu-list-item">- <?php echo $file['name']; ?></a></li>
+                <?php } } ?>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
 
 </body></html>

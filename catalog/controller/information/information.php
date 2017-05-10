@@ -35,6 +35,13 @@ class ControllerInformationInformation extends Controller {
 			$data['button_continue'] = $this->language->get('button_continue');
 
 			$data['description'] = html_entity_decode($information_info['description'], ENT_QUOTES, 'UTF-8');
+			if(!empty($information_info['video'])){
+				$video_arr = explode("?v=", $information_info['video']);
+				
+				$data['videoCode'] = $video_arr[1];
+			}else{
+				$data['videoCode'] = false;
+			}
 
 			$data['continue'] = $this->url->link('common/home');
 

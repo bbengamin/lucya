@@ -39,9 +39,68 @@
             <li><a href="#tab-ftp" data-toggle="tab"><?php echo $tab_ftp; ?></a></li>
             <li><a href="#tab-mail" data-toggle="tab"><?php echo $tab_mail; ?></a></li>
             <li><a href="#tab-server" data-toggle="tab"><?php echo $tab_server; ?></a></li>
+            <li><a href="#tab-socnets" data-toggle="tab">Социальные сети</a></li>
+            
+            <li><a href="#tab-gallery" data-toggle="tab">Галерея</a></li>
           </ul>
           <div class="tab-content">
+            
+            <div class="tab-pane" id="tab-socnets">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-vk">ВКонтакте</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_vk" value="<?php echo $config_vk; ?>" id="input-vk" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-facebook">Facebook</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_facebook" value="<?php echo $config_facebook; ?>" id="input-facebook" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-instagram">Instagram</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_instagram" value="<?php echo $config_instagram; ?>" id="input-instagram" class="form-control" />
+                </div>
+              </div>
+            </div>
+            
+             <div class="tab-pane" id="tab-gallery">
+                 <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-gallery">Баннеры</label>
+                  <div class="col-sm-10">
+                    <select id="input-banner" class="form-control">
+                      <option>----</option>
+                      <?php foreach ($banners as $banner) { ?>
+                        <option value="<?php echo $banner['banner_id']; ?>"><?php echo $banner['name']; ?></option>
+                      <?php } ?>
+                    </select>
+                    <div id="config_gallery" class="well well-sm" style="height: 150px; overflow: auto;">
+                      <?php foreach ($config_gallery as $gallery) { ?>
+                      <div id="featured-product<?php echo $gallery['banner_id']; ?>"><i class="fa fa-minus-circle"></i> <?php echo $gallery['name']; ?>
+                        <input type="hidden" name="config_gallery[]" value="<?php echo $gallery['banner_id']; ?>" />
+                      </div>
+                      <?php } ?>
+                    </div>
+                  </div>
+                </div>
+            </div>
             <div class="tab-pane active" id="tab-general">
+            <!--  <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-banner">Галерея</label>
+                <div class="col-sm-10">
+                  <select name="config_banner_id" id="input-banner" class="form-control">
+                    <?php foreach ($banners as $banner) { ?>
+                    <?php if ($banner['banner_id'] == $config_banner_id) { ?>
+                    <option value="<?php echo $banner['banner_id']; ?>" selected="selected"><?php echo $banner['name']; ?></option>
+                    <?php } else { ?>
+                    <option value="<?php echo $banner['banner_id']; ?>"><?php echo $banner['name']; ?></option>
+                    <?php } ?>
+                    <?php } ?>
+                  </select>
+                </div>
+              </div>-->
                 <div class="form-group required">
                   <label class="col-sm-2 control-label" for="input-meta-title"><?php echo $entry_meta_title; ?></label>
                   <div class="col-sm-10">
@@ -139,6 +198,15 @@
                   <label class="col-sm-2 control-label" for="input-telephone"><?php echo $entry_telephone; ?></label>
                   <div class="col-sm-10">
                     <input type="text" name="config_telephone" value="<?php echo $config_telephone; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-telephone" class="form-control" />
+                    <?php if ($error_telephone) { ?>
+                    <div class="text-danger"><?php echo $error_telephone; ?></div>
+                    <?php } ?>
+                  </div>
+                </div>
+                <div class="form-group required">
+                  <label class="col-sm-2 control-label" for="input-telephone"><?php echo $entry_telephone; ?></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_telephone2" value="<?php echo $config_telephone2; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-telephone" class="form-control" />
                     <?php if ($error_telephone) { ?>
                     <div class="text-danger"><?php echo $error_telephone; ?></div>
                     <?php } ?>
@@ -1654,4 +1722,14 @@ $('select[name=\'config_country_id\']').on('change', function() {
 
 $('select[name=\'config_country_id\']').trigger('change');
 //--></script></div>
+
+  <script type="text/javascript"><!--
+$('#input-banner').on('change select', function(){
+		$('#config_gallery').append('<div id="featured-product' + $(this).find(":selected").val() + '"><i class="fa fa-minus-circle"></i> ' + $(this).find(":selected").text() + '<input type="hidden" name="config_gallery[]" value="' + $(this).find(":selected").val() + '" /></div>');	
+});
+	
+$('#config_gallery').delegate('.fa-minus-circle', 'click', function() {
+	$(this).parent().remove();
+});
+//--></script>
 <?php echo $footer; ?>

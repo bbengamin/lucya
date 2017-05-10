@@ -132,6 +132,15 @@ class ControllerModuleFeatured extends Controller {
 			}
 		}
 
+		
+		if (isset($this->request->post['description'])) {
+			$data['description'] = $this->request->post['description'];
+		} elseif (!empty($module_info)) {
+			$data['description'] = $module_info['description'];
+		} else {
+			$data['description'] = '';
+		}
+		
 		if (isset($this->request->post['limit'])) {
 			$data['limit'] = $this->request->post['limit'];
 		} elseif (!empty($module_info)) {

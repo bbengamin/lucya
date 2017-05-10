@@ -3,8 +3,8 @@ class ControllerModuleFeatured extends Controller {
 	public function index($setting) {
 		$this->load->language('module/featured');
 
-		$data['heading_title'] = $this->language->get('heading_title');
-
+		$data['heading_title'] = $setting['name'];
+		$data['description'] = html_entity_decode($setting['description']);
 		$data['text_tax'] = $this->language->get('text_tax');
 
 		$data['button_cart'] = $this->language->get('button_cart');

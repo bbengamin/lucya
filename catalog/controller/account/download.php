@@ -114,11 +114,6 @@ class ControllerAccountDownload extends Controller {
 	}
 
 	public function download() {
-		if (!$this->customer->isLogged()) {
-			$this->session->data['redirect'] = $this->url->link('account/download', '', 'SSL');
-
-			$this->response->redirect($this->url->link('account/login', '', 'SSL'));
-		}
 
 		$this->load->model('account/download');
 
@@ -156,8 +151,6 @@ class ControllerAccountDownload extends Controller {
 			} else {
 				exit('Error: Headers already sent out!');
 			}
-		} else {
-			$this->response->redirect($this->url->link('account/download', '', 'SSL'));
 		}
 	}
 }

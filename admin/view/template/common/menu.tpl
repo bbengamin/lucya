@@ -1,5 +1,14 @@
 <ul id="menu">
-  <li id="dashboard"><a href="<?php echo $home; ?>"><i class="fa fa-dashboard fa-fw"></i> <span><?php echo $text_dashboard; ?></span></a></li>
+  <li><a href="<?php echo $information; ?>"><?php echo $text_information; ?></a></li>
+  <li><a href="<?php echo $product; ?>"><?php echo $text_product; ?></a></li>
+  <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
+  <li><a href="<?php echo $banner; ?>"><?php echo $text_banner; ?></a></li>
+  <li><a href="<?php echo $module; ?>"><?php echo $text_module; ?></a></li>
+  <li><a href="<?php echo $setting; ?>"><?php echo $text_setting; ?></a></li>
+  <li><a href="<?php echo $review; ?>"><?php echo $text_review; ?></a></li>
+  <li><a href="<?php echo $download; ?>"><?php echo $text_download; ?></a></li>
+  
+  <!--<li id="dashboard"><a href="<?php echo $home; ?>"><i class="fa fa-dashboard fa-fw"></i> <span><?php echo $text_dashboard; ?></span></a></li>
   <li id="catalog"><a class="parent"><i class="fa fa-tags fa-fw"></i> <span><?php echo $text_catalog; ?></span></a>
     <ul>
       <li><a href="<?php echo $category; ?>"><?php echo $text_category; ?></a></li>
@@ -198,5 +207,5 @@
         </ul>
       </li>
     </ul>
-  </li>
+  </li>-->
 </ul>

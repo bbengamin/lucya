@@ -1,10 +1,10 @@
 <?php
 // Heading
-$_['heading_title']     = 'Файлы для скачивания';
+$_['heading_title']     = 'Разделы меню';
 
 // Text
 $_['text_success']      = 'Настройки успешно изменены!';
-$_['text_list']         = 'Файлы для скачивания';
+$_['text_list']         = 'Разделы меню';
 $_['text_add']          = 'Добавить';
 $_['text_edit']         = 'Редактирование';
 $_['text_upload']       = 'Файл загружен';
@@ -15,7 +15,7 @@ $_['column_date_added'] = 'Дата';
 $_['column_action']     = 'Действие';
 
 // Entry
-$_['entry_name']        = 'Название загрузки';
+$_['entry_name']        = 'Название раздела меню';
 $_['entry_filename']    = 'Имя файла';
 $_['entry_mask']        = 'Маска';
 

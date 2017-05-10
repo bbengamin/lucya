@@ -155,6 +155,49 @@ class ControllerProductProduct extends Controller {
 		}
 
 		$this->load->model('catalog/product');
+		
+		$prods = $this->db->query('SELECT product_id FROM oc_product ORDER BY sort_order');
+		$array_products = array();
+		
+		foreach ($prods->rows as $row) {
+			$array_products[$row['product_id']] = $row['product_id'];
+		}
+		
+		$currentKey = key($array_products);
+	    while ($currentKey !== null && $currentKey != $product_id) {
+	       next($array_products);
+	       $currentKey = key($array_products);
+	    }
+	    
+		$next = next($array_products);
+		
+		
+		
+		$array_products = array();
+		
+		foreach ($prods->rows as $row) {
+			$array_products[$row['product_id']] = $row['product_id'];
+		}
+		$currentKey = key($array_products);
+	    while ($currentKey !== null && $currentKey != $product_id) {
+	       next($array_products);
+	       $currentKey = key($array_products);
+	    }
+	    
+		$prev = prev($array_products); 
+		
+		if($next) {
+			$data['next'] = $this->url->link('product/product', 'product_id=' . $next);
+		}else{
+			$data['next'] = false;
+		}
+		
+		if($prev) {
+			$data['prev'] = $this->url->link('product/product', 'product_id=' . $prev);
+		}else{
+			$data['prev'] = false;
+		}
+		
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
